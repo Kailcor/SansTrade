@@ -69,7 +69,7 @@ export default class SelectionMenu {
       }else{
           this.itemSelectedList[this.sectionObj.ID] = 0;
       }
-      console.log(this.disableItems[this.sectionObj.ID]);
+      
       if(this.disableItems[this.sectionObj.ID] != undefined && this.disableItems[this.sectionObj.ID].length > 0 ){
           this.disableItems[this.sectionObj.ID].forEach((item) => {
               if( this.itemSelectedList[this.sectionObj.ID] === item)  {
