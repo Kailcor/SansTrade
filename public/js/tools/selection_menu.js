@@ -10,7 +10,7 @@ export default class SelectionMenu {
       this.sectionObj = this.menuMapping.SECTION[this.currentSectionID]; //Object of the section which is the user in...
       this.items = [];// Array with all the items of all sections item[maxNumberOfItems*sectionID + itemID] = sprite;
       this.itemSelectedList = []; // which item is selected in each section.
-
+      this.disableItems = [];
 
       this.itemSelectedList[this.sectionObj.ID] = 0; //settig default item selected.
       this.maxNumberOfItemsCurrentSection = this.sectionObj.ITEMS.length - 1;
@@ -22,6 +22,7 @@ export default class SelectionMenu {
                 + this.menuMapping.SECTION[this.currentSectionID].ITEMS.length;
 
       this.createItems();
+
   }
   getListItemsSelected(){
       return this.itemSelectedList;
@@ -68,6 +69,14 @@ export default class SelectionMenu {
       }else{
           this.itemSelectedList[this.sectionObj.ID] = 0;
       }
+      console.log(this.disableItems[this.sectionObj.ID]);
+      if(this.disableItems[this.sectionObj.ID] != undefined && this.disableItems[this.sectionObj.ID].length > 0 ){
+          this.disableItems[this.sectionObj.ID].forEach((item) => {
+              if( this.itemSelectedList[this.sectionObj.ID] === item)  {
+                  this.nextItem();
+              }
+          });
+      }
   }
   prevItem(){
     if(this.itemSelectedList[this.sectionObj.ID]>0){
@@ -75,8 +84,30 @@ export default class SelectionMenu {
     }else{
       this.itemSelectedList[this.sectionObj.ID] = this.maxNumberOfItemsCurrentSection;
     }
+    if(this.disableItems[this.sectionObj.ID] != undefined && this.disableItems[this.sectionObj.ID].length > 0 ){
+      console.log("array of disableItems");
+      console.log(this.disableItems[this.sectionObj.ID]);
+        this.disableItems[this.sectionObj.ID].forEach((item) => {
+            if( this.itemSelectedList[this.sectionObj.ID] === item)  {
+                this.prevItem();
+            }
+        });
+    }
   }
+  getActiveSection(){
+    return this.sectionObj.ID;
+  }
+  getActiveItem(){
+    this.itemSelectedList[this.sectionObj.ID];
+  }
+  getSelectedItemFromSection(sectionID){
+      return this.menuMapping.SECTION[sectionID].ITEMS[this.itemSelectedList[sectionID]];
 
+  }
+  setDisableItems(sectionID,array){
+
+      this.disableItems[sectionID] = array;
+  }
   update(){
       var self = this;
       this.items.forEach(  (item,index) => {

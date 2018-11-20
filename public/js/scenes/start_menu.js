@@ -1,6 +1,8 @@
 import MENU_MAPPING from "../start_menu_mapping.js";
 import SelectionMenu from "../tools/selection_menu.js";
 import LoadingScene from "./loading_scene.js";
+const CHARA_SECTIONID = 0;
+const TRADE_SECTIONID = 1;
 
 export default class StartMenu extends LoadingScene {
   constructor(){
@@ -9,30 +11,22 @@ export default class StartMenu extends LoadingScene {
   preload() {
       this.createLoadingBar();
       this.setListeners(this.load);
-      //Loading assets
-      //tiles in spritesheet
-      //this.load.spritesheet('tiles','assets/world/tiles.png', {frameWidth: 8, frameHeight: 8, margin: 1, spacing: 2});
-      //this.load.tilemapTiledJSON('lightmap','assets/world/Palawar.json');
 
       this.load.image('background', 'assets/raw/SelectionChara3.png');
       this.load.spritesheet('objects','assets/raw/objects.png', {frameWidth: 16, frameHeight: 16});
       this.load.spritesheet('faces','assets/raw/faces2.png', {frameWidth: 64, frameHeight: 64});
-    //  this.load.spritesheet('hearts','assets/ui/hearts.png', {frameWidth: 10, frameHeight: 10});
-      //this.load.image('manabar','assets/raw/objects.png');
-      //this.load.image('manabarbg','assets/ui/manabarbg.png');
+
+      MENU_MAPPING.SECTION[0].ITEMS.forEach((item,index)=> {
+          this.load.spritesheet(item.SPRITESHEETKEY,'assets/players/'+item.SPRITESHEETKEY + '.png', {frameWidth: 24, frameHeight: 32});
+      });
+
   }
 
   create() {
       //Reading sockect
     	//this.socket = io();
       this.add.image(320,320, 'background');
-      //Moved to Selection_menu
-      // this.menuSectionID = 0;
-      // this.numSections = MENU_MAPPING.SECTION.length -1;
-      //
-      // this.menuActualSection = MENU_MAPPING.SECTION[this.menuSectionID]; //Which section is the user in...
-      // this.menuItemSelected = []; // which item is selected.
-      // this.menuItemSelected[this.menuActualSection.ID] = 0; //settig default item.
+
 
       this.nextUpdate = 0;
       this.elapseTimeForMenu = 300;
@@ -43,31 +37,28 @@ export default class StartMenu extends LoadingScene {
 
       this.defineAnims();
       this.menu = new SelectionMenu(MENU_MAPPING, this);
-      // var x = 100;
-      // var y = 100;
-      // var distance = 60;
-      // let scale = 3;
 
-      // this.menuItems = [];
-      // var self = this;
-      //for(let section )
-      // MENU_MAPPING.SECTION.forEach(function(section){
-      //    section.ITEMS.forEach(function (item) {
-      //
-      //      self.menuItems[(section.ID*10) +item.ID] = self.physics.add.sprite(item.X,item.Y, item.SPRITEKEY);
-      //      self.menuItems[(section.ID*10) +item.ID].alpha = 0.5;
-      //      self.menuItems[(section.ID*10) + item.ID].setScale(item.SCALE);
-      //
-      //      self.menuItems[(section.ID*10) + item.ID].anims.play(item.ANIMKEY,false);
-      //
-      //    });
-      // });
+      this.selectedHero = this.physics.add.sprite(200,520, "faces");
+      this.defaultHeroTrade = this.physics.add.sprite(222,550, "objects");
+      this.extraHeroTrade = this.physics.add.sprite(260,550, "objects");
+      //this.selectedHero.setScale(1.2);
+      this.defaultHeroTrade.setScale(1.8);
+      this.extraHeroTrade.setScale(1.8);
 
-      //console.log(this.menuItemSelected);
+
+      this.extraHeroTrade.anims.play("empty");
+      //Creating description text
+      this.infoText = this.add
+        .text(280, 490, "", {
+          font: "18px monospace",
+          fill: "#000000",
+          padding: { x: 20, y: 10 }
+        });
   }
 
   update(time, delta) {
         //this.menuItems[0].anims.play('carpinter',false);
+        this.updateData();
         if (this.cursors.left.isDown){
           //console.log(this.menuItems);
           if(this.nextUpdate < time){
@@ -128,8 +119,25 @@ export default class StartMenu extends LoadingScene {
         //this.updateData(playerInfo);
 
   }
-  updateData(playerInfo){
+  updateData(){
+      if(this.menu.getActiveSection() == CHARA_SECTIONID ){
+          var item = this.menu.getSelectedItemFromSection(CHARA_SECTIONID);
+          this.infoText.setText(item.infoText);
+          this.selectedHero.anims.play(item.ANIMKEY);
+          this.defaultHeroTrade.anims.play(item.TRADE);
+          var filterArray = [] ;
+          MENU_MAPPING.SECTION[TRADE_SECTIONID].ITEMS.forEach((trade) => {
+              if(trade.ANIMKEY === item.TRADE) filterArray.push(trade.ID);
+          });
 
+          if(filterArray.length > 0) this.menu.setDisableItems(TRADE_SECTIONID,filterArray);
+
+      }
+      if(this.menu.getActiveSection() == TRADE_SECTIONID ){
+          var item = this.menu.getSelectedItemFromSection(TRADE_SECTIONID);
+          this.extraHeroTrade.anims.play(item.ANIMKEY);
+          this.infoText.setText(item.infoText);
+      }
   }
   defineAnims(){
     self = this;
@@ -175,7 +183,7 @@ export default class StartMenu extends LoadingScene {
     });
     self.anims.create({
       key: 'carpenter',
-      frames: [{ key: 'objects', frame: 464}],
+      frames: [{ key: 'objects', frame: 497}],
       frameRate: 5
     });
     self.anims.create({
@@ -185,12 +193,12 @@ export default class StartMenu extends LoadingScene {
     });
     self.anims.create({
       key: 'blacksmith',
-      frames: [{ key: 'objects', frame: 466}],
+      frames: [{ key: 'objects', frame: 464}],
       frameRate: 5
     });
     self.anims.create({
       key: 'alquimist',
-      frames: [{ key: 'objects', frame: 497}],
+      frames: [{ key: 'objects', frame: 466}],
       frameRate: 5
     });
     self.anims.create({

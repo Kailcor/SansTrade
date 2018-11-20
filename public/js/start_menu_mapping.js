@@ -2,9 +2,9 @@ var x = 90;
 var x_dist= 50;
 var y = 150;
 var y_dist = 210;
-var x_emb = 105;
-var y_emb = 540;
-var x_emb_dist = 80;
+var x_emb = 205;
+var y_emb = 300;
+var x_emb_dist = 60;
 var MENU_MAPPING = {
   SECTION:[
     {
@@ -14,12 +14,12 @@ var MENU_MAPPING = {
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'mee',
           ANIMKEY: 'mee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y,
-          TRADE: 0,
+          TRADE: 'blacksmith',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -37,18 +37,23 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: Mee',
+            'Dmg: 19',
+            'Def: 15'
 
+          ]
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'yee',
           ANIMKEY: 'yee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y_dist,
-          TRADE: 0,
+          TRADE: 'carpenter',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -66,18 +71,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'lee',
           ANIMKEY: 'lee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y,
-          TRADE: 0,
+          TRADE: 'alquimist',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -95,18 +107,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'ree',
           ANIMKEY: 'ree',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y_dist,
-          TRADE: 0,
+          TRADE: 'chef',
 
           headDirection: 'standDown',
           heroSpeed: 30,
@@ -125,18 +144,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'tee',
           ANIMKEY: 'tee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y,
-          TRADE: 0,
+          TRADE: 'chef',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -154,18 +180,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'xee',
           ANIMKEY: 'xee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y_dist,
-          TRADE: 0,
+          TRADE: 'chaman',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -183,18 +216,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'kee',
           ANIMKEY: 'kee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y,
-          TRADE: 0,
+          TRADE: 'alquimist',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -212,18 +252,25 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: ',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         },
         {
           NAME: '',
           SPRITEKEY: 'faces',
-          SPRITESHEETKEY: '',
+          SPRITESHEETKEY: 'wee',
           ANIMKEY: 'wee',
           SCALE: 1.5,
           X: x+=x_dist,
           Y: y_dist,
-          TRADE: 0,
+          TRADE: 'blacksmith',
           headDirection: 'standDown',
           heroSpeed: 30,
           maxSpeed: 100,
@@ -241,7 +288,14 @@ var MENU_MAPPING = {
           manaRecoverNextTime: 0 ,
           healthRecoverRate: 300,
           healthRecoverAmount: 1,
-          healthRecoverNextTime: 0
+          healthRecoverNextTime: 0,
+          infoText: [
+            'Name: Wee',
+            'Trade: ',
+            'Dmg: 18',
+            'Def: 20'
+
+          ]
 
         }
       ]
