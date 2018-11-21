@@ -6,7 +6,8 @@ export default class PowerMarker {
       this.scene = scene;
       this.player = player;
       this.isVisible = false;
-      this.tileSize = this.scene.map.tileWidth*2;
+      //this.tileSize = this.scene.map.tileWidth*2;
+      this.tileSize = 16*2;
       this.factorX = 1;
       this.factorY = 1;
       this.marker = this.scene.add.graphics();

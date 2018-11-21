@@ -1,9 +1,11 @@
 import MENU_MAPPING from "../start_menu_mapping.js";
 import SelectionMenu from "../tools/selection_menu.js";
 import LoadingScene from "./loading_scene.js";
+import WorldScene from "./scene_world.js";
+
 const CHARA_SECTIONID = 0;
 const TRADE_SECTIONID = 1;
-
+var isReadyNextScene = false;
 export default class StartMenu extends LoadingScene {
   constructor(){
     super({key: 'startMenuScene'});
@@ -93,17 +95,15 @@ export default class StartMenu extends LoadingScene {
             }
         }
 
-        if(this.cursors.space.isDown){
-          // if(this.menuSectionID < this.numSections){
-          //     if(this.nextUpdate < time){
-          //         this.menuActualSection = MENU_MAPPING.SECTION[++this.menuSectionID];
-          //         this.menuItemSelected[this.menuActualSection.ID] = 0;
-          //         this.nextUpdate= time +this.elapseTimeForMenu;
-          //     }
-          // }else{
-          //   // TODO change scene;
-          //   console.log("The game starts!");
-          // }
+        if(this.cursors.space.isDown && !isReadyNextScene){
+          if(this.menu.getActiveSection() == TRADE_SECTIONID){
+            isReadyNextScene = true;
+            console.log("in TRADE_SECTIONID   ");
+            let worldScene = new WorldScene();
+            var playerInfo = this.menu.getSelectedItemFromSection(CHARA_SECTIONID);
+            this.registry.set('playerInfo', playerInfo);
+            this.scene.add('scene-world', worldScene,true);
+          }
         }
 
         // this.menuItems.forEach(  (item,index) => {

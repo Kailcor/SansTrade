@@ -1,5 +1,5 @@
 
-import WorldScene from "./scenes/scene-world.js";
+import WorldScene from "./scenes/scene_world.js";
 import DungeonScene from "./dungeon_1.js";
 import StartMenu from "./scenes/start_menu.js";
 import StartScreen from "./scenes/start_screen.js";

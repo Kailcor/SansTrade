@@ -182,7 +182,7 @@ export default class Player {
     }
 
     this.hero.setMaxVelocity(this.hero.heroMaxSpeed);
-  
+
     this.powerMarker = new PowerMarker(scene,this);
 
     /*// Track the arrow keys & WASD
@@ -265,7 +265,7 @@ export default class Player {
             //Check if the player can mine the gold.
             if(time > this.hero.lastMined && this.hero.mana > 0){
                  this.hero.lastMined = time + this.hero.miningSpeed;
-                 this.scene.socket.emit('playerMining');
+                 //this.scene.socket.emit('playerMining');
                  this.hero.mana--;
             }
 
@@ -273,12 +273,12 @@ export default class Player {
 
 
          if(!this.hero.heroMoving && !this.hero.isDashing){
-                this.scene.socket.emit('playerStopMoving');
+                //this.scene.socket.emit('playerStopMoving');
                 this.hero.anims.play(this.hero.headDirection, true);
                 this.hero.setVelocityY(0);
                 this.hero.setVelocityX(0);
          }else{
-                this.scene.socket.emit('playerMovement', {x: this.hero.x, y: this.hero.y, headDirection: this.hero.headDirection, velocityX: this.hero.body.velocity.x, velocityY: this.hero.body.velocity.y });
+                //this.scene.socket.emit('playerMovement', {x: this.hero.x, y: this.hero.y, headDirection: this.hero.headDirection, velocityX: this.hero.body.velocity.x, velocityY: this.hero.body.velocity.y });
 
          }
 

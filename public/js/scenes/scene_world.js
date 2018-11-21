@@ -5,13 +5,16 @@ import MENU_MAPPING from "../start_menu_mapping.js";
  * A class that extends Phaser.Scene and wraps up the core logic for the platformer level.
  */
 export default class WorldScene extends Phaser.Scene {
+
   preload() {
       //Loading assets
       //tiles in spritesheet
+      this.playerInfo = this.registry.get('playerInfo');
+
       this.load.spritesheet('tiles','assets/world/tiles.png', {frameWidth: 8, frameHeight: 8, margin: 1, spacing: 2});
       this.load.tilemapTiledJSON('lightmap','assets/world/Palawar.json');
 
-      this.load.spritesheet('hero','assets/players/link.png', {frameWidth: 16, frameHeight: 16});
+      this.load.spritesheet('hero','assets/players/'+this.playerInfo.SPRITESHEETKEY+'.png', {frameWidth: 24, frameHeight: 32});
       this.load.spritesheet('hearts','assets/ui/hearts.png', {frameWidth: 10, frameHeight: 10});
       this.load.image('manabar','assets/ui/manabar.png');
       this.load.image('manabarbg','assets/ui/manabarbg.png');
@@ -21,14 +24,15 @@ export default class WorldScene extends Phaser.Scene {
 
       //Other players group
       //this.otherPlayers = this.physics.add.group();
-      this.playerInfo = MENU_MAPPING.SECTION[0].ITEMS[0];
+      //this.playerInfo = MENU_MAPPING.SECTION[0].ITEMS[0];
+      //this.playerInfo = this.registry.get('playerInfo');
       //cursors
       this.cursors = this.input.keyboard.createCursorKeys();
       this.mainButtoms = this.input.keyboard.addKeys('Q,W,E,R');
 
       //Loading map
       this.map = this.make.tilemap({key:'lightmap'});
-      this.groundTiles = this.map.addTilesetImage('tiles',"tiles",8,8,0,0);
+      this.groundTiles = this.map.addTilesetImage('tiles',"tiles",16,16,0,0);
 
       this.backgroundLayer  = this.map.createDynamicLayer('background1', this.groundTiles);
       this.backgroundLayer2  = this.map.createDynamicLayer('background2', this.groundTiles);
@@ -38,7 +42,7 @@ export default class WorldScene extends Phaser.Scene {
       //set limites del mundo al tamaño del mapa.
       this.physics.world.bounds.width = this.backgroundLayer.width;
       this.physics.world.bounds.height = this.backgroundLayer.height
-      this.addPlayer(playerInfo);
+      this.addPlayer(this.playerInfo);
       this.createMiniMap(this);
 
       //Make the main camera focus on the player
