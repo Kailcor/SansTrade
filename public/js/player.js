@@ -19,25 +19,25 @@ export default class Player {
     const anims = scene.anims;
     anims.create({
        key: 'down',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 0, end: 1}),
+        frames: this.scene.anims.generateFrameNumbers('hero', {start: 6, end: 8}),
         frameRate: 5,
         repeat: -1
     });
     anims.create({
         key: 'up',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 2, end: 3}),
+        frames: [ {key: 'hero',  frame: 0 }, {key: 'hero',  frame: 2 } ],
         frameRate: 5,
         repeat: -1
     });
    anims.create({
         key: 'left',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 4, end: 5}),
+        frames: [ {key: 'hero',  frame: 9 }, {key: 'hero',  frame: 11 } ],
         frameRate: 5,
         repeat: -1
     });
     anims.create({
         key: 'right',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 6, end: 7}),
+        frames: [ {key: 'hero',  frame: 3 }, {key: 'hero',  frame: 5 } ],
         frameRate: 5,
         repeat: -1
     });
@@ -69,71 +69,71 @@ export default class Player {
 
     anims.create({
         key: 'downSpade',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 8, end: 9}),
+        frames: [ {key: 'hero',  frame: 0 }, {key: 'hero',  frame: 2 } ],
         frameRate: 8,
         repeat: 1
     });
     anims.create({
         key: 'leftSpade',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 10, end: 11}),
+        frames: [ {key: 'hero',  frame: 0 }, {key: 'hero',  frame: 2 } ],
         frameRate: 8,
         repeat: 1
     });
     anims.create({
         key: 'upSpade',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 12, end: 13}),
+        frames: [ {key: 'hero',  frame: 0 }, {key: 'hero',  frame: 2 } ],
         frameRate: 8,
         repeat: 1
     });
     anims.create({
         key: 'rightSpade',
-        frames: this.scene.anims.generateFrameNumbers('hero', {start: 14, end: 15}),
+        frames: [ {key: 'hero',  frame: 0 }, {key: 'hero',  frame: 2 } ],
         frameRate: 8,
         repeat: 1
     });
     //pull
     anims.create({
         key: 'downPull',
-        frames: [ {key: 'hero',  frame: 16 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
     anims.create({
         key: 'upPull',
-        frames: [ {key: 'hero',  frame: 17 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
     anims.create({
         key: 'rightPull',
-        frames: [ {key: 'hero',  frame: 19 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
 
     anims.create({
         key: 'leftPull',
-        frames: [ {key: 'hero',  frame: 18 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
   //Pick
     anims.create({
         key: 'downPick',
-        frames: [ {key: 'hero',  frame: 20 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
 
     anims.create({
         key: 'upPick',
-        frames: [ {key: 'hero',  frame: 23 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
     anims.create({
         key: 'rightPick',
-        frames: [ {key: 'hero',  frame: 22 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
 
     anims.create({
         key: 'leftPick',
-        frames: [ {key: 'hero',  frame: 21 } ],
+        frames: [ {key: 'hero',  frame: 3 } ],
         frameRate: 8
     });
 
