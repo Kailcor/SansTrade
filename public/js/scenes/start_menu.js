@@ -102,7 +102,8 @@ export default class StartMenu extends LoadingScene {
             let worldScene = new WorldScene();
             var playerInfo = this.menu.getSelectedItemFromSection(CHARA_SECTIONID);
             this.registry.set('playerInfo', playerInfo);
-            this.scene.add('scene-world', worldScene,true);
+            this.scene.add('scene-world', worldScene, true);
+            this.scene.remove("startMenuScene");
           }
         }
 

@@ -11,9 +11,8 @@ export default class WorldScene extends Phaser.Scene {
       //tiles in spritesheet
       this.playerInfo = this.registry.get('playerInfo');
 
-      this.load.spritesheet('tiles','assets/world/tiles.png', {frameWidth: 8, frameHeight: 8, margin: 1, spacing: 2});
-      this.load.tilemapTiledJSON('lightmap','assets/world/Palawar.json');
-
+      this.load.spritesheet('tiles','assets/world/tiles.png', {frameWidth: 16, frameHeight: 16, margin: 0, spacing: 0});
+      this.load.tilemapTiledJSON('lightmap','assets/world/overworld.json');
       this.load.spritesheet('hero','assets/players/'+this.playerInfo.SPRITESHEETKEY+'.png', {frameWidth: 24, frameHeight: 32});
       this.load.spritesheet('hearts','assets/ui/hearts.png', {frameWidth: 10, frameHeight: 10});
       this.load.image('manabar','assets/ui/manabar.png');
@@ -32,18 +31,23 @@ export default class WorldScene extends Phaser.Scene {
 
       //Loading map
       this.map = this.make.tilemap({key:'lightmap'});
-      this.groundTiles = this.map.addTilesetImage('tiles',"tiles",16,16,0,0);
+      this.groundTiles = this.map.addTilesetImage('tiles',"tiles",16,16,1,2);
 
-      this.backgroundLayer  = this.map.createDynamicLayer('background1', this.groundTiles);
-      this.backgroundLayer2  = this.map.createDynamicLayer('background2', this.groundTiles);
-      this.objects  = this.map.createDynamicLayer('Objects', this.groundTiles);
+      this.backgroundLayer  = this.map.createDynamicLayer('background', this.groundTiles);
+      this.backgroundLayer2  = this.map.createDynamicLayer('walls', this.groundTiles);
+      this.objects  = this.map.createDynamicLayer('staticObjects', this.groundTiles);
+
+      this.backgroundLayer2.setCollisionByExclusion([-1]);
+      this.backgroundLayer2.setCollisionByProperty({ collides: true });
+
       this.objects.setCollisionByExclusion([-1]);
 
       //set limites del mundo al tamaño del mapa.
       this.physics.world.bounds.width = this.backgroundLayer.width;
       this.physics.world.bounds.height = this.backgroundLayer.height
       this.addPlayer(this.playerInfo);
-      this.createMiniMap(this);
+      this.physics.world.addCollider(this.player.hero, this.backgroundLayer2);
+      this.createMiniMap();
 
       //Make the main camera focus on the player
       this.cameras.main.setBounds(-300, -300,1100 ,1100);
@@ -79,14 +83,15 @@ export default class WorldScene extends Phaser.Scene {
       this.scene.restart();
     }*/
   }
-  createMiniMap(self){
-       self.minimap = self.cameras.add(10,0, 200,200).setZoom(0.25);
-       self.minimap.scrollX = 320;
-       self.minimap.scrollY = 320;
+  createMiniMap(){
+       this.minimap = this.cameras.add(10,0, 200,200).setZoom(0.25);
+       this.minimap.scrollX = 320;
+       this.minimap.scrollY = 320;
    }
 
   addPlayer(playerInfo){
-      this.player = new Player(self, playerInfo);
+      console.log(playerInfo);
+      this.player = new Player(this, playerInfo);
       //colliders
       this.physics.add.collider(this.objects, this.player.hero);
       //self.physics.add.collider(self.otherPlayers, self.player.hero, this.collideCallbackTest);//create collideCallBack!

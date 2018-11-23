@@ -13,10 +13,10 @@ export default class Player {
   constructor(scene, playerInfo) {
     this.scene = scene;
     this.cursors = scene.cursors;
-
+    //console.log(this.scene);
 
     // Create the animations we need from the player spritesheet
-    const anims = scene.anims;
+    const anims = this.scene.anims;
     anims.create({
        key: 'down',
         frames: this.scene.anims.generateFrameNumbers('hero', {start: 6, end: 8}),
@@ -45,22 +45,22 @@ export default class Player {
   // Stand
       anims.create({
        key: 'standDown',
-        frames: [ {key: 'hero',  frame: 0 } ],
+        frames: [ {key: 'hero',  frame: 7 } ],
         frameRate: 5
     });
     anims.create({
         key: 'standUp',
-        frames: [ {key: 'hero',  frame: 2 } ],
+        frames: [ {key: 'hero',  frame: 1 } ],
         frameRate: 5
     });
     anims.create({
         key: 'standLeft',
-        frames: [ {key: 'hero',  frame: 4 } ],
+        frames: [ {key: 'hero',  frame: 10 } ],
         frameRate: 5
     });
     anims.create({
         key: 'standRight',
-        frames:  [ {key: 'hero',  frame: 6 } ],
+        frames:  [ {key: 'hero',  frame: 4 } ],
         frameRate: 5
     });
 
@@ -140,7 +140,7 @@ export default class Player {
 
 
     // Create the physics-based sprite that we will move around and animate
-    this.hero = scene.physics.add.sprite(playerInfo.x, playerInfo.y, 'hero');
+    this.hero = this.scene.physics.add.sprite(50, 50, 'hero');
     //Hero stats
     this.hero.manaMax = 100;
     this.hero.mana = 100;
@@ -172,8 +172,8 @@ export default class Player {
     this.uibar = new UiBar(scene, this, playerInfo.x, playerInfo.y);
 
     this.hero.setCollideWorldBounds(true);
-    scene.cameras.main.scrollX = playerInfo.x - scene.physics.world.bounds.width/2;
-    scene.cameras.main.scrollY = playerInfo.y - scene.physics.world.bounds.height/2;
+    this.scene.cameras.main.scrollX = playerInfo.x - scene.physics.world.bounds.width/2;
+    this.scene.cameras.main.scrollY = playerInfo.y - scene.physics.world.bounds.height/2;
 
     if (playerInfo.team === 'blue') {
       //this.hero.setTint(0x0000ff);
@@ -183,7 +183,7 @@ export default class Player {
 
     this.hero.setMaxVelocity(this.hero.heroMaxSpeed);
 
-    this.powerMarker = new PowerMarker(scene,this);
+    this.powerMarker = new PowerMarker(this.scene,this);
 
     /*// Track the arrow keys & WASD
     const { LEFT, RIGHT, UP, W, A, D } = Phaser.Input.Keyboard.KeyCodes;
