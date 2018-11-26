@@ -64,7 +64,7 @@ export default class PowerMarker {
           break;
       case 'standUp':
           factorY+=long;
-          factorY*=-1;;
+          factorY*=-1;
           factorX+=wide;
           break;
       case 'standLeft':

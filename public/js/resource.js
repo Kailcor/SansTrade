@@ -4,17 +4,17 @@
  * method when you're done with the resource.
  */
 export default class Resource {
-  constructor(scene, type){
+  constructor(scene, type, x,y){
     this.scene = scene;
     this.amount = this.randomAmount();
     this.state = "available";
-    //this.sprite =
+    this.sprite = this.scene.physics.add.sprite(x, y, 'objects');
   }
   update(){
     //TODO Create update for resource.
   }
   consumed(){
-      //TODO make the resource consumed and change the sprite and clock to renovation.
+    //TODO make the resource consumed and change the sprite and clock to renovation.
   }
 
   destroy(){
