@@ -6,6 +6,7 @@
 export default class Resource {
   constructor(scene, type, x,y){
     this.scene = scene;
+    this.type = type;
     this.amount = this.randomAmount();
     this.state = "available";
     this.sprite = this.scene.physics.add.sprite(x, y, 'objects');
@@ -22,5 +23,14 @@ export default class Resource {
   }
   randomAmount(){
     //TODO return random number between accepted values
+  }
+  defineAnims(){
+    const anims = this.scene.anims;
+    anims.create({
+        key: 'plant',
+        frames: [ {key: 'objects',  frame: 130 } ],
+        frameRate: 5,
+        repeat: -1
+    });
   }
 }
