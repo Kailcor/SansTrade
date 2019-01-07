@@ -13,7 +13,7 @@ export default class StartMenu extends LoadingScene {
   preload() {
       this.createLoadingBar();
       this.setListeners(this.load);
-
+      this.load.audio('musicStartMenu','assets/sound/music/Palmetto_Moon.mp3');
       this.load.image('background', 'assets/raw/SelectionChara3.png');
       this.load.spritesheet('objects','assets/raw/objects.png', {frameWidth: 16, frameHeight: 16});
       this.load.spritesheet('faces','assets/raw/faces2.png', {frameWidth: 64, frameHeight: 64});
@@ -27,8 +27,18 @@ export default class StartMenu extends LoadingScene {
   create() {
       //Reading sockect
     	//this.socket = io();
-      this.add.image(320,320, 'background');
+      this.music = this.sound.add('musicStartMenu', {
+          mute: false,
+          volume: 1,
+          rate: 1,
+          detune: 0,
+          seek: 0,
+          loop: true,
+          delay: 0
+      });
+      this.music.play();
 
+      this.add.image(320,320, 'background');
 
       this.nextUpdate = 0;
       this.elapseTimeForMenu = 300;
@@ -104,6 +114,7 @@ export default class StartMenu extends LoadingScene {
             this.registry.set('playerInfo', playerInfo);
             this.scene.add('scene-world', worldScene, true);
             this.scene.remove("startMenuScene");
+            this.music.stop();
           }
         }
 
@@ -213,9 +224,7 @@ export default class StartMenu extends LoadingScene {
       frameRate: 5
     });
   }
-  startGame(){
 
-  }
 
 
 }

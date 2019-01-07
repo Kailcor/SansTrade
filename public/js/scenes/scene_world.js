@@ -26,6 +26,17 @@ export default class WorldScene extends Phaser.Scene {
       //this.playerInfo = MENU_MAPPING.SECTION[0].ITEMS[0];
       //this.playerInfo = this.registry.get('playerInfo');
       //cursors
+      this.music = this.sound.add('musicStartMenu', {
+          mute: false,
+          volume: 0.6,
+          rate: 0.5,
+          detune: 100,
+          seek: 0,
+          loop: true,
+          delay: 0
+      });
+      this.music.play();
+
       this.cursors = this.input.keyboard.createCursorKeys();
       this.mainButtoms = this.input.keyboard.addKeys('Q,W,E,R');
 

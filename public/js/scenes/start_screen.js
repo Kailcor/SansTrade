@@ -8,10 +8,21 @@ export default class StartScreen extends LoadingScene {
   preload() {
       this.createLoadingBar();
       this.setListeners(this.load);
+      this.load.audio('musicStartScreen','assets/sound/music/Day_Of_Recon.mp3');
       this.load.atlas('shapes', 'assets/world/particles/shapes.png', 'assets/world/particles/shapes.json');
       this.load.image('backgroundStartScreen', 'assets/raw/startScreen.png');
   }
   create(){
+      this.music = this.sound.add('musicStartScreen', {
+          mute: false,
+          volume: 1,
+          rate: 1,
+          detune: 0,
+          seek: 0,
+          loop: true,
+          delay: 0
+      });
+      this.music.play();
       this.particles = FogParticles;
       this.background = this.add.image(10,-20, 'backgroundStartScreen');
       this.background.setScale(1.2);
@@ -53,6 +64,7 @@ export default class StartScreen extends LoadingScene {
       this.cameras.main.scrollX = (halfWidth - quarterWidth + (Math.cos(this.iter) * quarterWidth))|0;
       this.iter += 0.009;
       if(this.cursors.space.isDown){
+        this.music.stop();
         this.scene.start('startMenuScene');
       }
   }
