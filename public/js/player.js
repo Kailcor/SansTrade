@@ -18,7 +18,7 @@ export default class Player {
     // Create the animations we need from the player spritesheet
     const anims = this.scene.anims;
     anims.create({
-       key: 'down',
+        key: 'down',
         frames: this.scene.anims.generateFrameNumbers('hero', {start: 6, end: 8}),
         frameRate: 5,
         repeat: -1
